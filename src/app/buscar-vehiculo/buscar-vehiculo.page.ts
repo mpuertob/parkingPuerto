@@ -27,7 +27,6 @@ export class BuscarVehiculoPage implements OnInit {
   }
 
   rastrear() {
-    alert("Te voy a rastrear");
     this.matricula = this.matricula.toUpperCase();
     this.datosService
       .rastrear(this.matricula)
