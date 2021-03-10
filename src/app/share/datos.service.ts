@@ -127,10 +127,12 @@ export class DatosService {
       this.platform
         .ready()
         .then(() => {
+          alert("Plataforma lista mock");
           this.sqlite
             //si la bbdd no existe la crea y la abre y si existe la abre
             .create(this.getConector())
             .then((db: SQLiteObject) => {
+              alert("BBDD open lista mock");
               this.db = db;
               resolve("BBDD preparada");
             })

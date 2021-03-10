@@ -12,7 +12,9 @@ export class SqliteDbCopyMock extends SqliteDbCopy {
    * @param source {string} Full native path for the folder in which db file is present. The "/" must be added at the end of path. For.eg. /sdcard/mydb/. Should not include dbname.
    * @return {Promise<any>}
    */
-  checkDbOnStorage(dbname: string, source: string): Promise<any>;
+  checkDbOnStorage(dbname: string, source: string): Promise<any> {
+    return null;
+  }
   /**
    * Copy database which is available on the device external/internal storage to app default db location
    * (for ios only, use 0 for Android)
@@ -32,7 +34,9 @@ export class SqliteDbCopyMock extends SqliteDbCopy {
     location: number,
     source: string,
     deleteolddb: boolean
-  ): Promise<any>;
+  ): Promise<any> {
+    return null;
+  }
   /**
    * Copy the app database to external/internal storage on the device.
    * (for ios only, use 0 for Android)
@@ -52,7 +56,9 @@ export class SqliteDbCopyMock extends SqliteDbCopy {
     location: number,
     destination: string,
     overwrite: boolean
-  ): Promise<any>;
+  ): Promise<any> {
+    return null;
+  }
   /**
    * This method allows you to remove the database from the apps default database storage location.
    * (for ios only, use 0 for Android)
@@ -65,7 +71,9 @@ export class SqliteDbCopyMock extends SqliteDbCopy {
    * @param location {number} Location where to copy the database for app (only applicable for ios).For Android pass 0.
    * @return {Promise<any>}
    */
-  remove(dbname: string, location: number): Promise<any>;
-  static ɵfac: ɵngcc0.ɵɵFactoryDef<SqliteDbCopy, never>;
-  static ɵprov: ɵngcc0.ɵɵInjectableDef<SqliteDbCopy>;
+  remove(dbname: string, location: number): Promise<any> {
+    return null;
+  }
+  // static ɵfac: ɵngcc0.ɵɵFactoryDef<SqliteDbCopy, never>;
+  // static ɵprov: ɵngcc0.ɵɵInjectableDef<SqliteDbCopy>;
 }
