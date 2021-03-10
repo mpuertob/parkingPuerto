@@ -46,15 +46,12 @@ export class AparcarVehiculoPage implements OnInit {
       const valid = this.datosService.validarMatricula(matricula);
       if (valid) {
         this.vehiculoSeleccionado.matricula = matricula;
+        this.datosService.insertarVehiculo(this.vehiculoSeleccionado);
         this.datosService
-          .insertarVehiculo(this.vehiculoSeleccionado)
+          .aparcarVehiculo(numeroAparcamiento, this.vehiculoSeleccionado)
           .then(() => {
-            this.datosService
-              .aparcarVehiculo(numeroAparcamiento, this.vehiculoSeleccionado)
-              .then(() => {
-                alert("Vehiculo Aparcado");
-                this.vehiculoSeleccionado = null;
-              });
+            alert("Vehiculo Aparcado");
+            this.vehiculoSeleccionado = null;
           });
       }
     }

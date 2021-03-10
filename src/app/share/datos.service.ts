@@ -9,7 +9,7 @@ import { CopiaBBDDService } from "./copia-bbdd.service";
 })
 export class DatosService {
   private db: SQLiteObject;
-
+  private mapaVehiculos: Map<String, Vehiculo> = new Map<String, Vehiculo>();
   constructor(
     private platform: Platform,
     private copiaBBDD: CopiaBBDDService,
@@ -78,15 +78,12 @@ export class DatosService {
     return this.executeSentence(listaAparcamientosLibres, sql, [tipo]);
   }
   insertarVehiculo(vehiculo: Vehiculo) {
-    let tipo: String = vehiculo.toString();
-    let matricula: String = vehiculo.matricula;
-    const sql =
-      "INSERT INTO Vehiculos (Matricula,idTipoVehiculo) VALUES (?,?);";
-    return this.executeSentence([], sql, [matricula, tipo]);
+    this.mapaVehiculos.set(vehiculo.matricula, vehiculo);
+    alert("Vehiculo insertado correctamente");
   }
   borrarVehiculo(matricula: String) {
-    const sql = "DELETE FROM Vehiculos WHERE Matricula = ?;";
-    return this.executeSentence([], sql, [matricula]);
+    alert("Vehiculo borrado correctamente");
+    this.mapaVehiculos.delete(matricula);
   }
 
   aparcarVehiculo(numeroAparcamiento: Number, vehiculoSeleccionado: Vehiculo) {

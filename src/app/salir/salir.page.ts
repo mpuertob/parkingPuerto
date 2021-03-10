@@ -25,12 +25,11 @@ export class SalirPage implements OnInit {
         if (datos.length > 0) {
           datos.forEach((el) => {
             this.datosService.vaciarAparcamiento(el.id).then(() => {
-              this.datosService.borrarVehiculo(this.matricula).then(() => {
-                this.mostrar = null;
-                this.matricula = null;
-                alert("Hasta Pronto amigo 👍");
-                this.volverHome();
-              });
+              this.datosService.borrarVehiculo(this.matricula);
+              this.mostrar = null;
+              this.matricula = null;
+              alert("Hasta Pronto amigo 👍");
+              this.volverHome();
             });
           });
         } else {
