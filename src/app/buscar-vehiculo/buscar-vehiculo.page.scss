@@ -1,0 +1,23 @@
+.buscador{
+  text-align: center;
+  align-items: center;
+}
+.imagen{
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+}
+.vehiculoEncontrado{
+  margin-top: 20px;
+  width: auto;
+  height: auto;
+  border: 2px solid green;
+  background-color: rgb(200, 252, 200);
+}
+.vehiculoNoEncontrado{
+  margin-top: 20px;
+  width: auto;
+  height: auto;
+  border: 2px solid rgb(110, 3, 3);
+  background-color: rgb(250, 148, 182);
+}

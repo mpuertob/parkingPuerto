@@ -1,0 +1,41 @@
+<ion-content [fullscreen]="true">
+  <div class="contenedor">
+
+
+    <section class="cabecera">
+      <h1 class="text-6xl">{{titulo}}:</h1>
+      <h3 class="text-3xl">{{eslogan}}.
+      </h3>
+      <img class="centrado" src="../../assets/icon/dinero.png">
+      <img class="logo" src="../../assets/icon/Parking.png" alt="aparcamiento">
+    </section>
+
+    <section class="medio">
+
+      <div class="text-3xl p-8">
+        <h1 class="text-6xl">¿Qué Desea?</h1>
+
+        <div>
+          <h2>Buscar Aparcamiento:</h2>
+          <ion-button (click)="aparcar()">Aparcar</ion-button>
+        </div>
+        <div>
+          <h2>Ver el estado del Parking:</h2>
+          <ion-button (click)="verPlano()">Estado</ion-button>
+        </div>
+
+        <div>
+          <h2>Encontrar Mi Vehículo:</h2>
+          <ion-button (click)="encontrarVehiculo()">Rastrear</ion-button>
+        </div>
+
+        <div>
+          <h2>Salir del Parking:</h2>
+          <ion-button (click)="salir()">Salir</ion-button>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+</ion-content>

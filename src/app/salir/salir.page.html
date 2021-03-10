@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+
+
+    <ion-title>Hasta Pronto</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <img src="../../assets/icon/despedida.png">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="body text-3xl">
+
+    <h1>Muchas gracias por usar esta maravillosa app.</h1>
+    <img src="../../assets/icon/barrera.png" class="centrado">
+    <p class="body text-2xl">
+      Introduzca la matrícula de su vehiculo para salir.
+      <input class="input" [placeholder]=frase [(ngModel)]="matricula" (keyup)="validar()">
+    </p>
+    <div *ngIf="mostrar">
+      <button class="boton" (click)="salir()">
+      </button>
+    </div>
+    <div class="vehiculoNoEncontrado" *ngIf="fallo">
+      <h1>{{noEncontrado}}</h1>
+      <img class="imagen" src="../../assets/icon/noEncontrado.png">
+    </div>
+  </section>
+</ion-content>

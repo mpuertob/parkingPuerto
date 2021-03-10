@@ -1,0 +1,31 @@
+.body {
+  text-align: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+}
+.centrado {
+  margin-left: auto;
+  margin-right: auto;
+  display: inline;
+}
+.input{
+  width: auto;
+  border: 3px ridge rgb(250, 125, 125);
+}
+.boton{
+  background-image: url("../../assets/icon/salir.png");
+  background-repeat: no-repeat;
+  width: 180px;
+  height: 180px;
+  margin-top: 10px;
+  border: 2px ridge black;
+  border-radius: 90px;
+}
+.vehiculoNoEncontrado {
+  margin-top: 20px;
+  width: auto;
+  height: auto;
+  border: 2px solid rgb(110, 3, 3);
+  background-color: rgb(250, 148, 182);
+}

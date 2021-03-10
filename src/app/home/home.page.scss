@@ -1,0 +1,30 @@
+.logo{
+   margin-left: auto;
+   margin-right: auto;
+  padding-bottom: 1rem;
+}
+.centrado {
+  margin-left: auto;
+  margin-right: auto;
+}
+.contenedor{
+  text-align: center;
+  align-items: center;
+  background-image: url("../../assets/icon/paisaje.png");
+  height: auto;
+}
+.cabecera{
+  // background-color: #9df8ec;
+  padding-bottom: 5px;
+}
+.medio{
+  // background-image: url("../../assets/icon/app.jpg");
+  background-repeat: repeat;
+  background-position-x: left;
+  height: auto;
+  border-radius: 20px;
+  background: rgba(241, 252, 248, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(107, 107, 107, 0.842);
+  backdrop-filter: blur(3px);
+}
+

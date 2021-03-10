@@ -1,0 +1,24 @@
+.exterior {
+  background-color: red;
+  width: 8rem;
+}
+.card{
+background-color: rgba(95, 204, 247, 0.637);
+}
+.parkingVacio{
+  background-image: url("../../assets/icon/cielo.jpg");
+  background-repeat: no-repeat;
+  height: auto;
+}
+.contenedor {
+  text-align: center;
+  align-items: center;
+  background-image: url("../../assets/icon/informativo.jpg");
+  background-repeat: no-repeat;
+  height: auto;
+}
+.matriculas{
+background: rgba(243, 167, 253, 0.445);
+box-shadow: 0 8px 32px 0 rgba(255, 132, 31, 0.842);
+backdrop-filter: blur(3px);
+}

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Estado del parking</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="parkingVacio" *ngIf="!porcentajeOcupabilidad">
+    <ion-card>
+      <ion-card-content>
+        <ion-card-title>Parking Vacio, puedes aparcar donde quieras.</ion-card-title>
+        <img src="../../assets/icon/parkingVacio.jpg">
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div class="contenedor">
+    <div *ngIf="porcentajeOcupabilidad">
+      <ion-card class="card">
+        <ion-card-content>
+          <ion-card-title>-Porcentaje de ocupabilidad: {{porcentajeOcupabilidad}}%.</ion-card-title>
+          <img src="../../assets/icon/planoParking.jpg">
+          <!-- <img class="centrado" src="../../assets/icon/miPlano.png"> -->
+          <ion-card-title>-Numero total de aparcamientos: {{numeroTotalAparcamiento}}.</ion-card-title>
+          <ion-card-title>-Numero de aparcamientos ocupados: {{numeroDeAparcamientosOcupados}}.</ion-card-title>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="matriculas">
+      <section *ngIf="matriculas()">
+        <ion-label>Matriculas Activas:</ion-label>
+        <ul *ngFor="let matricula of matriculasActivas">
+          <li>{{matricula}}</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</ion-content>

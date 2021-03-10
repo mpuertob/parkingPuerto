@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>¿Habrá plazas?</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <section class="body">
+    <h1>Vamos a comprobar si hay plazas disponibles</h1>
+    <h1>¿Qué vehículo deseas aparcar?</h1>
+    <div>
+
+      <img class="centrado" src="../../assets/icon/p.png">
+      <img class="centrado" src="../../assets/icon/coche.png">
+      <img class="centrado" src="../../assets/icon/moto.png">
+      <img class="centrado" src="../../assets/icon/minusvalido.png">
+    </div>
+
+    <div>
+      <ion-list class="body">
+        <ion-list-header class="body">
+          <ion-label>Vehiculos Disponibles:</ion-label>
+        </ion-list-header>
+        <ion-radio-group value="vehiculos" class="body">
+          <ion-item *ngFor="let tipoVehiculo of tiposVehiculos" class="body">
+            <ion-label>{{tipoVehiculo}}</ion-label>
+            <ion-radio (ionFocus)="buscarAparcamiento(tipoVehiculo)" slot="start" value={{tipoVehiculo}}></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </div>
+  </section>
+  <div *ngIf="vehiculoSeleccionado">
+    <h1>Hay {{aparcamientosLibres.length}} aparcamientos libres para {{vehiculoSeleccionado}}, son los siguientes:</h1>
+    <ul *ngFor="let aparcamiento of aparcamientosLibres">
+      <li class="listadoAparcamiento" (click)="aparcar(aparcamiento.Numero)">
+        Aparcamiento-Nº: {{aparcamiento.Numero}}.
+      </li>
+    </ul>
+  </div>
+</ion-content>
