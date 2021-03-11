@@ -28,19 +28,16 @@ export class BuscarVehiculoPage implements OnInit {
 
   rastrear() {
     this.matricula = this.matricula.toUpperCase();
-    this.datosService
-      .rastrear(this.matricula)
-      .then((datos) => {
-        if (datos[0] != undefined) {
-          this.localizacionVehiculo =
-            "Su vehiculo ha sido encontrado en el Aparcamiento: " +
-            datos[0].Numero;
-        } else {
-          this.localizacionVehiculo = undefined;
-          this.noEncontrado = "Lo siento, su vehículo no se ha encontrado.";
-        }
-      })
-      .catch();
+    let numeroAparcamiento = this.datosService.rastrear(this.matricula);
+
+    if (numeroAparcamiento != undefined) {
+      this.localizacionVehiculo =
+        "Su vehiculo ha sido encontrado en el Aparcamiento: " +
+        numeroAparcamiento;
+    } else {
+      this.localizacionVehiculo = undefined;
+      this.noEncontrado = "Lo siento, su vehículo no se ha encontrado.";
+    }
   }
   validateControl(item) {
     this.mostrar = this.validators.validateControl(item);

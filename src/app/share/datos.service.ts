@@ -82,17 +82,8 @@ export class DatosService {
         .catch((err) => {});
     });
   }
-  rastrear(matricula: String) {
-    const sql =
-      "select Aparcamientos.Numero from Aparcamientos where Aparcamientos.idVehiculo = (Select Vehiculos.id from Vehiculos where Vehiculos.Matricula = ?)";
-    let localizacion: String[] = [];
-    return new Promise<any>((resolve, reject) => {
-      this.executeSentence(localizacion, sql, [matricula])
-        .then((datos) => {
-          resolve(datos);
-        })
-        .catch();
-    });
+  rastrear(matricula: String): Number {
+    return this.mapaAparcamientos.get(matricula);
   }
   buscarAparcamiento(tipo: String) {
     return this.mapaAparcamientosTipos.get(tipo);
