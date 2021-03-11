@@ -18,38 +18,27 @@ export class PlanoPage implements OnInit {
 
   ngOnInit() {}
   private obtenerNumeroDeVehiculosAparcados() {
-    return new Promise<number>((resolve, reject) => {
-      this.datosService
-        .obtenerNumeroDeAparcamientosOcupados()
-        .then((datos) => {
-          let numero = datos[0].cuenta;
-          this.numeroDeAparcamientosOcupados = numero;
-          resolve(numero);
-        })
-        .catch(() => {
-          reject(0);
-        });
-    });
+    let numero = this.datosService.obtenerNumeroDeAparcamientosOcupados();
+    this.numeroDeAparcamientosOcupados = numero;
+    return numero;
   }
   obtenerPorcentajeOcupabilidad() {
     let porcentajeTotal: number = 100;
     let porcentajeActivo: number;
-    this.datosService.obtenerNumeroTotalDeAparcamiento().then((datos) => {
-      this.numeroTotalAparcamiento = datos[0].cuenta;
-      this.obtenerNumeroDeVehiculosAparcados().then((numero) => {
-        let numeroVehiculosAparcados = numero;
-        porcentajeActivo =
-          (numeroVehiculosAparcados * porcentajeTotal) /
-          this.numeroTotalAparcamiento;
-        this.porcentajeOcupabilidad = porcentajeActivo;
-      });
-    });
+    this.numeroTotalAparcamiento = <number>(
+      this.datosService.obtenerNumeroTotalDeAparcamiento()
+    );
+    let numero = this.obtenerNumeroDeVehiculosAparcados();
+    let numeroVehiculosAparcados = numero;
+    porcentajeActivo =
+      (numeroVehiculosAparcados * porcentajeTotal) /
+      this.numeroTotalAparcamiento;
+    this.porcentajeOcupabilidad = porcentajeActivo;
   }
   obtenerTodasLasMatriculas() {
-    this.datosService.obtenerTodasLasMatriculas().then((datos) => {
-      datos.forEach((obj) => {
-        this.matriculasActivas.push(obj.Matricula);
-      });
+    let matriculas = Array.from(this.datosService.obtenerTodasLasMatriculas());
+    matriculas.forEach((matricula) => {
+      this.matriculasActivas.push(matricula);
     });
   }
   matriculas() {

@@ -124,18 +124,19 @@ export class DatosService {
       "Select Vehiculos.id from Vehiculos WHERE Vehiculos.Matricula = ?;";
     return this.executeSentence([], sql, [matricula]);
   }
-  obtenerNumeroDeAparcamientosOcupados() {
-    const sql =
-      "Select count(*) as cuenta from Aparcamientos WHERE idVehiculo not NULL";
-    return this.executeSentence([], sql, []);
+  obtenerNumeroDeAparcamientosOcupados(): number {
+    return this.mapaVehiculos.size;
   }
   obtenerNumeroTotalDeAparcamiento() {
-    const sql = "Select count(*) as cuenta from Aparcamientos WHERE 1";
-    return this.executeSentence([], sql, []);
+    let aparcamientosFinales: Array<Number> = this.mapaAparcamientosTipos.get(
+      "Coche"
+    );
+    let longitud = aparcamientosFinales.length - 1;
+    let aparcamientoFinal = aparcamientosFinales[longitud];
+    return aparcamientoFinal;
   }
   obtenerTodasLasMatriculas() {
-    const sql = "SELECT Vehiculos.Matricula from Vehiculos";
-    return this.executeSentence([], sql, []);
+    return this.mapaVehiculos.keys();
   }
   openDB(): Promise<any> {
     return new Promise((resolve, reject) => {
