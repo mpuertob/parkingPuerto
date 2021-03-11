@@ -13,11 +13,9 @@ export class CopiaBBDDService {
       this.platform
         .ready()
         .then(() => {
-          alert("Plataforma lista mock");
           this.sqlDbCopy
             .copy("bbddParking.db", 0)
             .then(() => {
-              alert("BBDD Copiada Mock");
               resolve("Copia terminada");
             })
             .catch((error) => {

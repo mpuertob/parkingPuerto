@@ -27,7 +27,7 @@
         <ion-radio-group value="vehiculos" class="body">
           <ion-item *ngFor="let tipoVehiculo of tiposVehiculos" class="body">
             <ion-label>{{tipoVehiculo}}</ion-label>
-            <ion-radio (ionFocus)="buscarAparcamiento(tipoVehiculo)" slot="start" value={{tipoVehiculo}}></ion-radio>
+            <ion-radio (click)="buscarAparcamiento(tipoVehiculo)" slot="start" value={{tipoVehiculo}}></ion-radio>
           </ion-item>
         </ion-radio-group>
       </ion-list>
@@ -36,8 +36,8 @@
   <div *ngIf="vehiculoSeleccionado">
     <h1>Hay {{aparcamientosLibres.length}} aparcamientos libres para {{vehiculoSeleccionado}}, son los siguientes:</h1>
     <ul *ngFor="let aparcamiento of aparcamientosLibres">
-      <li class="listadoAparcamiento" (click)="aparcar(aparcamiento.Numero)">
-        Aparcamiento-Nº: {{aparcamiento.Numero}}.
+      <li class="listadoAparcamiento" (click)="aparcar(aparcamiento)">
+        Aparcamiento-Nº: {{aparcamiento}}.
       </li>
     </ul>
   </div>

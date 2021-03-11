@@ -16,7 +16,7 @@ export class AparcarVehiculoPage implements OnInit {
   tiposVehiculos: String[] = [];
   mapaVehiculos: Map<String, Vehiculo> = new Map<String, Vehiculo>();
   vehiculoSeleccionado: Vehiculo;
-  aparcamientosLibres: Aparcamiento[] = [];
+  aparcamientosLibres: Number[] = [];
   constructor(private datosService: DatosService) {
     this.tiposVehiculos = Object.values(Vehiculos);
     this.mapaVehiculos.set(Vehiculos.Coche, new Coche("", ""));
@@ -32,9 +32,7 @@ export class AparcarVehiculoPage implements OnInit {
       `¿Seguro que desea buscar aparcamiento de ${vehiculo}?`
     );
     if (b) {
-      this.datosService.buscarAparcamiento(vehiculo).then((datos) => {
-        this.aparcamientosLibres = datos;
-      });
+      this.aparcamientosLibres = this.datosService.buscarAparcamiento(vehiculo);
     }
   }
   aparcar(numeroAparcamiento: Number) {
@@ -47,12 +45,12 @@ export class AparcarVehiculoPage implements OnInit {
       if (valid) {
         this.vehiculoSeleccionado.matricula = matricula;
         this.datosService.insertarVehiculo(this.vehiculoSeleccionado);
-        this.datosService
-          .aparcarVehiculo(numeroAparcamiento, this.vehiculoSeleccionado)
-          .then(() => {
-            alert("Vehiculo Aparcado");
-            this.vehiculoSeleccionado = null;
-          });
+        this.datosService.aparcarVehiculo(
+          numeroAparcamiento,
+          this.vehiculoSeleccionado
+        );
+        alert("Vehiculo aparcado");
+        this.vehiculoSeleccionado = null;
       }
     }
   }

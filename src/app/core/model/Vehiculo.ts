@@ -12,4 +12,5 @@ export abstract class Vehiculo {
   public set matricula(cadenaMatricula: String) {
     this._matricula = cadenaMatricula;
   }
+  public abstract toString();
 }

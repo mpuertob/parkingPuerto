@@ -10,11 +10,17 @@ import { CopiaBBDDService } from "./copia-bbdd.service";
 export class DatosService {
   private db: SQLiteObject;
   private mapaVehiculos: Map<String, Vehiculo> = new Map<String, Vehiculo>();
+  private mapaAparcamientos: Map<String, Number> = new Map<String, Number>();
+  private mapaAparcamientosTipos: Map<String, Array<Number>> = new Map<
+    String,
+    Array<Number>
+  >();
   constructor(
     private platform: Platform,
     private copiaBBDD: CopiaBBDDService,
     private sqlite: SQLite
   ) {
+    this.crearMapaAparcamientosTipo();
     this.platform
       .ready()
       .then(() => {
@@ -24,6 +30,23 @@ export class DatosService {
           .catch(() => {});
       })
       .catch(() => {});
+  }
+  private crearMapaAparcamientosTipo() {
+    this.mapaAparcamientosTipos.set("VehiculoAdaptado", [1, 2, 3, 4, 5, 6]);
+    this.mapaAparcamientosTipos.set("Moto", [7, 8, 9]);
+    this.mapaAparcamientosTipos.set("Coche", [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+    ]);
   }
   executeSentence(target: any[], sqlSentence: string, searchParam: any[]) {
     return new Promise<any>((resolveUno, rejectUno) => {
@@ -72,10 +95,7 @@ export class DatosService {
     });
   }
   buscarAparcamiento(tipo: String) {
-    const sql =
-      "select Aparcamientos.Numero from Aparcamientos where (Aparcamientos.idVehiculo is NULL) AND Aparcamientos.idTipoVehiculo = (select TipoVehiculos.id from TipoVehiculos where TipoVehiculos.Nombre = ?)";
-    let listaAparcamientosLibres: String[] = [];
-    return this.executeSentence(listaAparcamientosLibres, sql, [tipo]);
+    return this.mapaAparcamientosTipos.get(tipo);
   }
   insertarVehiculo(vehiculo: Vehiculo) {
     this.mapaVehiculos.set(vehiculo.matricula, vehiculo);
@@ -87,14 +107,21 @@ export class DatosService {
   }
 
   aparcarVehiculo(numeroAparcamiento: Number, vehiculoSeleccionado: Vehiculo) {
-    const sql =
-      "UPDATE Aparcamientos SET idVehiculo=(Select Vehiculos.id from Vehiculos WHERE Vehiculos.Matricula = ?), idTipoVehiculo=(Select Vehiculos.idTipoVehiculo from Vehiculos WHERE Vehiculos.Matricula = ?) WHERE Numero=?;";
-
-    return this.executeSentence([], sql, [
+    this.mapaAparcamientos.set(
       vehiculoSeleccionado.matricula,
-      vehiculoSeleccionado.matricula,
-      numeroAparcamiento,
-    ]);
+      numeroAparcamiento
+    );
+    let arrayAparcamientos = this.mapaAparcamientosTipos.get(
+      vehiculoSeleccionado.toString()
+    );
+    arrayAparcamientos = this.eliminarAparcamiento(
+      arrayAparcamientos,
+      numeroAparcamiento
+    );
+    this.mapaAparcamientosTipos.set(
+      vehiculoSeleccionado.toString(),
+      arrayAparcamientos
+    );
   }
   vaciarAparcamiento(id: number) {
     const sql =
@@ -124,12 +151,10 @@ export class DatosService {
       this.platform
         .ready()
         .then(() => {
-          alert("Plataforma lista mock");
           this.sqlite
             //si la bbdd no existe la crea y la abre y si existe la abre
             .create(this.getConector())
             .then((db: SQLiteObject) => {
-              alert("BBDD open lista mock");
               this.db = db;
               resolve("BBDD preparada");
             })
@@ -157,5 +182,15 @@ export class DatosService {
   validarMatricula(matricula: string): Boolean {
     const validador = /^\d{4}[-][a-zA-Z]{3}$/;
     return this.validarDato(matricula, validador);
+  }
+  private eliminarAparcamiento(
+    array: Array<Number>,
+    numeroAparcamiento: Number
+  ): Array<Number> {
+    let posicion = array.indexOf(numeroAparcamiento);
+    if (posicion !== -1) {
+      array.splice(posicion, 1);
+    }
+    return array;
   }
 }
