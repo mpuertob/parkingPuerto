@@ -90,10 +90,8 @@ export class DatosService {
   }
   insertarVehiculo(vehiculo: Vehiculo) {
     this.mapaVehiculos.set(vehiculo.matricula, vehiculo);
-    alert("Vehiculo insertado correctamente");
   }
   borrarVehiculo(matricula: String) {
-    alert("Vehiculo borrado correctamente");
     this.mapaVehiculos.delete(matricula);
   }
 
@@ -114,15 +112,14 @@ export class DatosService {
       arrayAparcamientos
     );
   }
-  vaciarAparcamiento(id: number) {
-    const sql =
-      "UPDATE Aparcamientos SET  idVehiculo = NULL WHERE Numero = (SELECT Numero FROM Aparcamientos WHERE idVehiculo = ?);";
-    return this.executeSentence([], sql, [id]);
+  vaciarAparcamiento(numeroAparcamiento: Number, vehiculo: Vehiculo) {
+    let aparcamientos = this.mapaAparcamientosTipos.get(vehiculo.toString());
+    aparcamientos.push(numeroAparcamiento);
+    aparcamientos = aparcamientos.sort();
+    this.mapaAparcamientosTipos.set(vehiculo.toString(), aparcamientos);
   }
-  obtenerIdVehiculo(matricula: String) {
-    const sql =
-      "Select Vehiculos.id from Vehiculos WHERE Vehiculos.Matricula = ?;";
-    return this.executeSentence([], sql, [matricula]);
+  obtenerVehiculo(matricula: String) {
+    return this.mapaVehiculos.get(matricula);
   }
   obtenerNumeroDeAparcamientosOcupados(): number {
     return this.mapaVehiculos.size;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Vehiculo } from "../core/model/Vehiculo";
 import { DatosService } from "../share/datos.service";
 
 @Component({
@@ -19,26 +20,21 @@ export class SalirPage implements OnInit {
   }
   salir() {
     this.matricula = this.matricula.toUpperCase();
-    this.datosService
-      .obtenerIdVehiculo(this.matricula)
-      .then((datos: Array<any>) => {
-        if (datos.length > 0) {
-          datos.forEach((el) => {
-            this.datosService.vaciarAparcamiento(el.id).then(() => {
-              this.datosService.borrarVehiculo(this.matricula);
-              this.mostrar = null;
-              this.matricula = null;
-              alert("Hasta Pronto amigo 👍");
-              this.volverHome();
-            });
-          });
-        } else {
-          this.mostrar = null;
-          this.matricula = null;
-          this.fallo = true;
-          this.noEncontrado = "Lo siento, su vehículo no se ha encontrado.";
-        }
-      });
+    let numeroAparcamiento = this.datosService.rastrear(this.matricula);
+    let vehiculo: Vehiculo = this.datosService.obtenerVehiculo(this.matricula);
+    if (vehiculo) {
+      this.datosService.vaciarAparcamiento(numeroAparcamiento, vehiculo);
+      this.datosService.borrarVehiculo(this.matricula);
+      this.mostrar = null;
+      this.matricula = null;
+      alert("Hasta Pronto amigo 👍");
+      this.volverHome();
+    } else {
+      this.mostrar = null;
+      this.matricula = null;
+      this.fallo = true;
+      this.noEncontrado = "Lo siento, su vehículo no se ha encontrado.";
+    }
   }
   validar() {
     this.mostrar = this.datosService.validarMatricula(this.matricula);
